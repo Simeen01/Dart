@@ -1,0 +1,78 @@
+import 'dart:io';
+//creating Todo List
+List createTodo(v){
+
+ var lst = new List();
+
+ lst.addAll([v]);
+ lst=v.split(",");
+
+ for(var k = 0; k < (lst.length); k++){ //k-key
+ //print('${k+1} : ${lst[k]}');
+ }
+ return lst;
+}
+//displaying your Todo List
+void display(todo){
+ print("\nDisplaying your Todo List");
+ print("-------------------------");
+ for(var k = 0; k < (todo.length); k++){ //k-key
+ print('${k+1} : ${todo[k]}');
+ }
+}
+//delete a completed task at a time
+void deleteTodo(todo){
+ print("Enter which task you have completed:");
+ var value = int.parse(stdin.readLineSync())- 1;
+ todo.removeAt(value);
+ print("\nThe updated Todo List:");
+ print("**********************");
+ for(var k = 0; k < (todo.length); k++){ //k-key
+ print('${k+1} : ${todo[k]}');
+ }
+}
+//clear all tasks
+void clear(todo){
+ todo.removeRange(0,todo.length);
+ print("All tasks cleared!");
+}
+//menu
+int main() {
+ String choice;
+ String v;
+ var todo;
+ print("\n---------------------------------------");
+ print(" Menu");
+ print("---------------------------------------");
+ print("1. To create your ToDo\n");
+ print("2. To display your ToDo\n");
+ print("3. To delete a ToDo\n");
+ print("4. To clear all ToDo\n");
+ print("0. Exit");
+ do{
+
+ stdout.write("\n\nEnter your menu choice\t: ");
+ choice = stdin.readLineSync();
+ switch(choice) {
+ case "1": {
+ stdout.write("\nWhat is your plan for today? (separate by comma)\n");
+ v = stdin.readLineSync(); //v-value
+ todo = createTodo(v);
+ print("\nYour Todo list has been created!\n");
+ }
+ break;
+ case "2": { display(todo); }
+ break;
+ case "3": { deleteTodo(todo); }
+ break;
+
+ case "4": { clear(todo); }
+ break;
+ case "0": { print("Bye Bye"); return 0; }
+ break;
+
+ default: { print("Invalid choice"); }
+ break;
+ }
+ }while(choice!=0);
+} 
